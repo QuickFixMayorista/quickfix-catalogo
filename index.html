@@ -767,40 +767,52 @@ function procesarCSV(texto){
   const iTransferencia=obtenerIndice(cabeceras,["TRANSFERENCIA"]);
   const iStock=obtenerIndice(cabeceras,["STOCK"]);
 
-  productos=filas
-    .slice(indiceCabecera+1)
-    .map((fila,index)=>({
-      ordenOriginal:index,
+productos=filas
+  .slice(indiceCabecera+1)
+  .map((fila,index)=>({
+    ordenOriginal:index,
 
-      articulo:
-        iArticulo>=0 ? limpiar(fila[iArticulo]) : "",
+    articulo:
+      iArticulo>=0 ? limpiar(fila[iArticulo]) : "",
 
-      componente:
-        iComponente>=0 ? limpiar(fila[iComponente]) : "",
+    componente:
+      iComponente>=0 ? limpiar(fila[iComponente]) : "",
 
-      descripcion:
-        iDescripcion>=0 ? limpiar(fila[iDescripcion]) : "",
+    descripcion:
+      iDescripcion>=0 ? limpiar(fila[iDescripcion]) : "",
 
-      notas:
-        iNotas>=0 ? limpiar(fila[iNotas]) : "",
+    notas:
+      iNotas>=0 ? limpiar(fila[iNotas]) : "",
 
-      usd:
-        iUSD>=0 ? limpiar(fila[iUSD]) : "",
+    usd:
+      iUSD>=0 ? limpiar(fila[iUSD]) : "",
 
-      efectivo:
-        iEfectivo>=0 ? limpiar(fila[iEfectivo]) : "",
+    efectivo:
+      iEfectivo>=0 ? limpiar(fila[iEfectivo]) : "",
 
-      transferencia:
-        iTransferencia>=0 ? limpiar(fila[iTransferencia]) : "",
+    transferencia:
+      iTransferencia>=0 ? limpiar(fila[iTransferencia]) : "",
 
-      stock:
-        iStock>=0 ? limpiar(fila[iStock]) : ""
-    }))
-    .filter(p =>
-      p.articulo ||
-      p.descripcion ||
-      p.componente
-    );
+    stock:
+      iStock>=0 ? limpiar(fila[iStock]) : ""
+  }))
+
+  // Dejamos solamente filas que realmente son productos.
+  // Los títulos/separadores del Sheet no tienen número de artículo.
+  .filter(p => {
+    const articulo=normalizar(p.articulo);
+    const descripcion=normalizar(p.descripcion);
+
+    if(!articulo) return false;
+
+    // Evita que entren encabezados repetidos del Sheet.
+    if(articulo==="ART" || articulo==="ARTICULO") return false;
+
+    // Evita filas vacías o separadores.
+    if(!descripcion) return false;
+
+    return true;
+  });
 
   cargarCategorias();
   cargarModelos();
@@ -826,15 +838,51 @@ function obtenerFamiliaCategoria(categoria){
 /* SUBCATEGORÍAS AUTOMÁTICAS DEL SHEET */
 
 function categoriasDisponibles(){
+
+  const categoriasPermitidas=[
+    "MODULOS",
+    "BATERIAS",
+    "TAG-ON",
+    "FLEX DE CARGA",
+    "FLEX NFC",
+    "MAGNETICO MAGSAFE",
+    "CAMARA PRINCIPAL",
+    "BOTON LATERAL CONTROL CAMARA",
+    "VIDRIO CAMARA PRINCIPAL",
+    "FLEX FLASH",
+    "CAMARA FRONTAL",
+    "SENSOR DE PROXIMIDAD",
+    "FLEX DE VOLUMEN",
+    "FLEX DE POWER",
+    "ALTAVOZ",
+    "AURICULAR",
+    "FLEX BLUETOOTH",
+    "FLEX WIFI",
+    "FLEX GPS",
+    "TAPAS TRASERAS",
+    "TORNILLOS",
+    "GOMITAS CAMARA TRASERA",
+    "BOTON HOME",
+    "HERRAMIENTRAS - INSUMOS",
+    "HERRAMIENTAS - INSUMOS",
+    "ACCESORIOS"
+  ];
+
   const mapa=new Map();
 
   productos.forEach(producto=>{
+
     const nombre=limpiar(producto.componente);
     const clave=normalizar(nombre);
 
-    if(nombre && !mapa.has(clave)){
+    if(
+      nombre &&
+      categoriasPermitidas.includes(clave) &&
+      !mapa.has(clave)
+    ){
       mapa.set(clave,nombre);
     }
+
   });
 
   return [...mapa.entries()];

@@ -736,83 +736,166 @@ function obtenerIndice(cabeceras,palabras){
 }
 
 function procesarCSV(texto){
-  const filas=parseCSV(texto);
-  const indiceCabecera=buscarFilaCabecera(filas);
 
-  if(indiceCabecera === -1){
-    throw new Error("No encontramos la fila de títulos de la planilla.");
-  }
+  const filas = parseCSV(texto);
+  const nuevosProductos = [];
 
-  const cabeceras=filas[indiceCabecera].map(normalizar);
+  let modeloActual = "";
+  let cabeceras = null;
 
-  const iArticulo=obtenerIndice(cabeceras,["ART"]);
+  let iArticulo = -1;
+  let iComponente = -1;
+  let iDescripcion = -1;
+  let iNotas = -1;
+  let iUSD = -1;
+  let iEfectivo = -1;
+  let iTransferencia = -1;
+  let iStock = -1;
 
-  const iComponente=obtenerIndice(
-    cabeceras,
-    ["COMPONENTE","CATEGORIA","TIPO"]
-  );
+  filas.forEach((fila, index) => {
 
-  const iDescripcion=obtenerIndice(
-    cabeceras,
-    ["DESCRIPCION","MODELO","PRODUCTO"]
-  );
+    const valores = fila.map(celda => limpiar(celda));
+    const normalizados = valores.map(celda => normalizar(celda));
 
-  const iNotas=obtenerIndice(
-    cabeceras,
-    ["NOTA","DETALLE","OBSERV"]
-  );
+    // Ignoramos filas completamente vacías
+    if(!valores.some(Boolean)) return;
 
-  const iUSD=obtenerIndice(cabeceras,["USDT","USD"]);
-  const iEfectivo=obtenerIndice(cabeceras,["EFECTIVO"]);
-  const iTransferencia=obtenerIndice(cabeceras,["TRANSFERENCIA"]);
-  const iStock=obtenerIndice(cabeceras,["STOCK"]);
+    // ---------------------------------------
+    // 1. DETECTAR ENCABEZADOS DE CADA BLOQUE
+    // ART | COMPONENTE | DESCRIPCION | ...
+    // ---------------------------------------
 
-productos=filas
-  .slice(indiceCabecera+1)
-  .map((fila,index)=>({
-    ordenOriginal:index,
+    const posibleArt = normalizados.findIndex(v =>
+      v === "ART" || v === "ARTICULO"
+    );
 
-    articulo:
-      iArticulo>=0 ? limpiar(fila[iArticulo]) : "",
+    const posibleComponente = normalizados.findIndex(v =>
+      v === "COMPONENTE" ||
+      v === "CATEGORIA" ||
+      v === "TIPO"
+    );
 
-    componente:
-      iComponente>=0 ? limpiar(fila[iComponente]) : "",
+    if(posibleArt >= 0 && posibleComponente >= 0){
 
-    descripcion:
-      iDescripcion>=0 ? limpiar(fila[iDescripcion]) : "",
+      cabeceras = normalizados;
 
-    notas:
-      iNotas>=0 ? limpiar(fila[iNotas]) : "",
+      iArticulo = obtenerIndice(cabeceras, ["ART","ARTICULO"]);
 
-    usd:
-      iUSD>=0 ? limpiar(fila[iUSD]) : "",
+      iComponente = obtenerIndice(
+        cabeceras,
+        ["COMPONENTE","CATEGORIA","TIPO"]
+      );
 
-    efectivo:
-      iEfectivo>=0 ? limpiar(fila[iEfectivo]) : "",
+      iDescripcion = obtenerIndice(
+        cabeceras,
+        ["DESCRIPCION","PRODUCTO"]
+      );
 
-    transferencia:
-      iTransferencia>=0 ? limpiar(fila[iTransferencia]) : "",
+      iNotas = obtenerIndice(
+        cabeceras,
+        ["NOTA","DETALLE","OBSERV"]
+      );
 
-    stock:
-      iStock>=0 ? limpiar(fila[iStock]) : ""
-  }))
+      iUSD = obtenerIndice(cabeceras, ["USDT","USD"]);
 
-  // Dejamos solamente filas que realmente son productos.
-  // Los títulos/separadores del Sheet no tienen número de artículo.
-  .filter(p => {
-    const articulo=normalizar(p.articulo);
-    const descripcion=normalizar(p.descripcion);
+      iEfectivo = obtenerIndice(
+        cabeceras,
+        ["EFECTIVO"]
+      );
 
-    if(!articulo) return false;
+      iTransferencia = obtenerIndice(
+        cabeceras,
+        ["TRANSFERENCIA"]
+      );
 
-    // Evita que entren encabezados repetidos del Sheet.
-    if(articulo==="ART" || articulo==="ARTICULO") return false;
+      iStock = obtenerIndice(cabeceras, ["STOCK"]);
 
-    // Evita filas vacías o separadores.
-    if(!descripcion) return false;
+      return;
+    }
 
-    return true;
+    // ---------------------------------------
+    // 2. DETECTAR TÍTULO DEL BLOQUE / MODELO
+    // Ej: IPHONE 17 PRO MAX
+    // ---------------------------------------
+
+    const celdasConTexto = valores.filter(Boolean);
+
+    if(
+      celdasConTexto.length === 1 &&
+      normalizar(celdasConTexto[0]).startsWith("IPHONE")
+    ){
+      modeloActual = celdasConTexto[0];
+      return;
+    }
+
+    // Todavía no encontramos encabezados:
+    // no intentamos crear productos.
+    if(!cabeceras) return;
+
+    // ---------------------------------------
+    // 3. LEER PRODUCTO REAL
+    // ---------------------------------------
+
+    const articulo =
+      iArticulo >= 0 ? limpiar(fila[iArticulo]) : "";
+
+    const componente =
+      iComponente >= 0 ? limpiar(fila[iComponente]) : "";
+
+    const descripcion =
+      iDescripcion >= 0 ? limpiar(fila[iDescripcion]) : "";
+
+    const notas =
+      iNotas >= 0 ? limpiar(fila[iNotas]) : "";
+
+    const usd =
+      iUSD >= 0 ? limpiar(fila[iUSD]) : "";
+
+    const efectivo =
+      iEfectivo >= 0 ? limpiar(fila[iEfectivo]) : "";
+
+    const transferencia =
+      iTransferencia >= 0 ? limpiar(fila[iTransferencia]) : "";
+
+    const stock =
+      iStock >= 0 ? limpiar(fila[iStock]) : "";
+
+    const artNormalizado = normalizar(articulo);
+
+    // No es un producto si no tiene artículo
+    if(!articulo) return;
+
+    // Seguridad extra por si aparece otro encabezado
+    if(
+      artNormalizado === "ART" ||
+      artNormalizado === "ARTICULO"
+    ){
+      return;
+    }
+
+    // No mostramos filas sin descripción
+    if(!descripcion) return;
+
+    nuevosProductos.push({
+      ordenOriginal: index,
+      articulo,
+      componente,
+      descripcion,
+      notas,
+      usd,
+      efectivo,
+      transferencia,
+      stock,
+
+      // IMPORTANTE:
+      // ahora el modelo viene del título real
+      // del bloque del Sheet.
+      modelo: modeloActual
+    });
+
   });
+
+  productos = nuevosProductos;
 
   cargarCategorias();
   cargarModelos();

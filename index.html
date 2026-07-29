@@ -1,338 +1,748 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>QuickFix | Repuestos para iPhone</title>
+<title>QuickFix Mayorista | Repuestos para iPhone</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f7f8fb;
-      color: #111827;
-    }
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f7fb;
+  color:#111827;
+}
 
-    .aviso {
-      background: #182253;
-      color: white;
-      text-align: center;
-      padding: 10px 15px;
-      font-size: 14px;
-    }
+.aviso{
+  background:#182253;
+  color:white;
+  text-align:center;
+  padding:10px 15px;
+  font-size:14px;
+}
 
-    header {
-      background: white;
-      padding: 25px 7%;
-      border-bottom: 1px solid #e5e7eb;
-    }
+header{
+  background:white;
+  padding:22px 6%;
+  border-bottom:1px solid #e5e7eb;
+}
 
-    .logo {
-      font-size: 38px;
-      font-weight: 800;
-      font-style: italic;
-      color: #182253;
-    }
+.logo{
+  font-size:38px;
+  font-weight:800;
+  font-style:italic;
+  color:#182253;
+}
 
-    .logo span {
-      color: #a79a94;
-      font-weight: 600;
-    }
+.logo span{
+  color:#a79a94;
+  font-weight:600;
+}
 
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 60px 25px;
-    }
+main{
+  max-width:1300px;
+  margin:auto;
+  padding:55px 25px;
+}
 
-    .hero {
-      text-align: center;
-      margin-bottom: 45px;
-    }
+.hero{
+  text-align:center;
+}
 
-    .hero h1 {
-      color: #182253;
-      font-size: 42px;
-      margin-bottom: 12px;
-    }
+.hero h1{
+  color:#182253;
+  font-size:42px;
+  margin-bottom:10px;
+}
 
-    .hero p {
-      color: #6b7280;
-      font-size: 18px;
-    }
+.hero p{
+  color:#6b7280;
+  font-size:17px;
+}
 
-    .buscador {
-      max-width: 800px;
-      margin: 35px auto;
-      background: white;
-      padding: 12px;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.08);
-    }
+.buscador{
+  max-width:800px;
+  margin:32px auto 20px;
+  background:white;
+  border-radius:16px;
+  box-shadow:0 8px 30px rgba(0,0,0,.07);
+  padding:8px;
+}
 
-    .buscador input {
-      width: 100%;
-      border: none;
-      outline: none;
-      padding: 18px;
-      font-size: 17px;
-      border-radius: 12px;
-    }
+.buscador input{
+  width:100%;
+  padding:18px;
+  border:0;
+  outline:0;
+  font-size:17px;
+  border-radius:12px;
+}
 
-    .categorias {
-      margin-top: 55px;
-    }
+.categorias{
+  margin-top:45px;
+}
 
-    .categorias h2 {
-      margin-bottom: 20px;
-      color: #182253;
-    }
+.categorias h2{
+  color:#182253;
+  margin-bottom:18px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:13px;
+}
 
-    .categoria {
-      background: white;
-      padding: 25px 15px;
-      border-radius: 16px;
-      text-align: center;
-      border: 1px solid #e5e7eb;
-      cursor: pointer;
-      transition: .2s;
-    }
+.categoria{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:20px 10px;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s;
+}
 
-    .categoria:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,.08);
-      border-color: #182253;
-    }
+.categoria:hover{
+  transform:translateY(-3px);
+  border-color:#182253;
+  box-shadow:0 6px 18px rgba(0,0,0,.07);
+}
 
-    .icono {
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
+.categoria.activa{
+  background:#182253;
+  color:white;
+}
 
-    .categoria strong {
-      color: #182253;
-    }
+.icono{
+  font-size:26px;
+  margin-bottom:8px;
+}
 
-    .productos {
-      margin-top: 55px;
-    }
+.categoria strong{
+  display:block;
+}
 
-    .productos h2 {
-      color: #182253;
-      margin-bottom: 20px;
-    }
+.resultados{
+  margin-top:45px;
+}
 
-    .producto {
-      background: white;
-      border-radius: 16px;
-      padding: 22px;
-      margin-bottom: 15px;
-      border: 1px solid #e5e7eb;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      align-items: center;
-    }
+.cabecera-resultados{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:18px;
+}
 
-    .producto h3 {
-      color: #182253;
-      margin-bottom: 8px;
-    }
+.cabecera-resultados h2{
+  color:#182253;
+}
 
-    .detalle {
-      color: #6b7280;
-      font-size: 14px;
-    }
+#contador{
+  color:#6b7280;
+  font-size:14px;
+}
 
-    .precios {
-      text-align: right;
-    }
+.producto{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:12px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:25px;
+  align-items:center;
+}
 
-    .efectivo {
-      font-size: 21px;
-      font-weight: bold;
-      color: #111827;
-    }
+.articulo{
+  color:#9ca3af;
+  font-size:12px;
+  margin-bottom:6px;
+}
 
-    .transferencia {
-      font-size: 14px;
-      color: #6b7280;
-      margin-top: 4px;
-    }
+.producto h3{
+  color:#182253;
+  font-size:17px;
+  margin-bottom:7px;
+}
 
-    .stock {
-      display: inline-block;
-      margin-top: 9px;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      background: #dcfce7;
-      color: #166534;
-    }
+.detalle{
+  color:#6b7280;
+  font-size:13px;
+  line-height:1.5;
+}
 
-    footer {
-      margin-top: 70px;
-      background: #182253;
-      color: white;
-      padding: 35px;
-      text-align: center;
-    }
+.precios{
+  min-width:220px;
+  text-align:right;
+}
 
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 31px;
-      }
+.precio-principal{
+  font-size:20px;
+  font-weight:700;
+}
 
-      main {
-        padding: 40px 15px;
-      }
+.precio-secundario{
+  color:#6b7280;
+  font-size:13px;
+  margin-top:4px;
+}
 
-      .producto {
-        grid-template-columns: 1fr;
-      }
+.stock{
+  display:inline-block;
+  margin-top:8px;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#dcfce7;
+  color:#166534;
+  font-size:11px;
+  font-weight:bold;
+}
 
-      .precios {
-        text-align: left;
-      }
-    }
-  </style>
+.stock.ingresando{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.estado{
+  text-align:center;
+  padding:45px 20px;
+  color:#6b7280;
+}
+
+footer{
+  margin-top:60px;
+  background:#182253;
+  color:white;
+  text-align:center;
+  padding:32px;
+}
+
+@media(max-width:650px){
+
+  main{
+    padding:38px 14px;
+  }
+
+  .hero h1{
+    font-size:31px;
+  }
+
+  .producto{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  .precios{
+    text-align:left;
+    min-width:0;
+  }
+
+  .cabecera-resultados{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="aviso">
-    Venta exclusiva para técnicos y comercios especializados
-  </div>
+<div class="aviso">
+  Venta exclusiva para técnicos y comercios especializados
+</div>
 
-  <header>
-    <div class="logo"><span>Quick</span>FIX</div>
-  </header>
+<header>
+  <div class="logo"><span>Quick</span>FIX</div>
+</header>
 
-  <main>
+<main>
 
-    <section class="hero">
+<section class="hero">
 
-      <h1>Encontrá tu repuesto.</h1>
+<h1>Encontrá tu repuesto.</h1>
 
-      <p>
-        Catálogo mayorista de repuestos para iPhone
-      </p>
+<p>Catálogo mayorista de repuestos para iPhone</p>
 
-      <div class="buscador">
-        <input
-          type="text"
-          placeholder="🔎 Buscá por modelo, repuesto o código..."
-        >
-      </div>
+<div class="buscador">
+<input
+  id="busqueda"
+  type="text"
+  placeholder="🔎 Buscá iPhone, repuesto, modelo o código..."
+>
+</div>
 
-    </section>
+</section>
+
+<section class="categorias">
+
+<h2>Categorías</h2>
+
+<div class="grid">
+
+<div class="categoria activa" data-categoria="TODOS">
+<div class="icono">📦</div>
+<strong>Todos</strong>
+</div>
+
+<div class="categoria" data-categoria="PANTALLA">
+<div class="icono">📱</div>
+<strong>Módulos</strong>
+</div>
+
+<div class="categoria" data-categoria="BATERIA">
+<div class="icono">🔋</div>
+<strong>Baterías</strong>
+</div>
+
+<div class="categoria" data-categoria="FLEX">
+<div class="icono">🔌</div>
+<strong>Flex</strong>
+</div>
+
+<div class="categoria" data-categoria="CAMARA">
+<div class="icono">📷</div>
+<strong>Cámaras</strong>
+</div>
+
+<div class="categoria" data-categoria="AUDIO">
+<div class="icono">🔊</div>
+<strong>Audio</strong>
+</div>
+
+<div class="categoria" data-categoria="OTROS">
+<div class="icono">⚙️</div>
+<strong>Otros</strong>
+</div>
+
+</div>
+</section>
+
+<section class="resultados">
+
+<div class="cabecera-resultados">
+<h2>Lista de precios</h2>
+<div id="contador">Cargando productos...</div>
+</div>
+
+<div id="productos">
+<div class="estado">Cargando lista de QuickFix...</div>
+</div>
+
+</section>
+
+</main>
+
+<footer>
+<strong>QuickFix Mayorista</strong><br><br>
+Repuestos para iPhone · Venta mayorista
+</footer>
 
 
-    <section class="categorias">
+<script>
 
-      <h2>Categorías</h2>
+const CSV_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vS5QFQA0ZbZgJ92THkuy9_RLx7rxfZ49V-PnMlkIUN6hvtwbl3Rol8KpmQOXtdsd04YduqitUwBg6nh/pub?gid=158452569&single=true&output=csv";
 
-      <div class="grid">
+let productos = [];
+let categoriaActual = "TODOS";
 
-        <div class="categoria">
-          <div class="icono">📱</div>
-          <strong>Módulos</strong>
-        </div>
+function limpiar(texto){
+  return String(texto ?? "").trim();
+}
 
-        <div class="categoria">
-          <div class="icono">🔋</div>
-          <strong>Baterías</strong>
-        </div>
+function normalizar(texto){
+  return limpiar(texto)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .toUpperCase();
+}
 
-        <div class="categoria">
-          <div class="icono">🔌</div>
-          <strong>Flex</strong>
-        </div>
+function parseCSV(texto){
 
-        <div class="categoria">
-          <div class="icono">📷</div>
-          <strong>Cámaras</strong>
-        </div>
+  const filas=[];
+  let fila=[];
+  let campo="";
+  let comillas=false;
 
-        <div class="categoria">
-          <div class="icono">🔊</div>
-          <strong>Audio</strong>
-        </div>
+  for(let i=0;i<texto.length;i++){
 
-        <div class="categoria">
-          <div class="icono">⚙️</div>
-          <strong>Otros</strong>
-        </div>
+    const caracter=texto[i];
 
-      </div>
+    if(caracter === '"'){
 
-    </section>
+      if(comillas && texto[i+1] === '"'){
+        campo+='"';
+        i++;
+      }else{
+        comillas=!comillas;
+      }
+
+    }else if(caracter === "," && !comillas){
+
+      fila.push(campo);
+      campo="";
+
+    }else if((caracter === "\n" || caracter === "\r") && !comillas){
+
+      if(caracter === "\r" && texto[i+1] === "\n"){
+        i++;
+      }
+
+      fila.push(campo);
+
+      if(fila.some(c => limpiar(c)!=="")){
+        filas.push(fila);
+      }
+
+      fila=[];
+      campo="";
+
+    }else{
+
+      campo+=caracter;
+
+    }
+  }
+
+  if(campo || fila.length){
+    fila.push(campo);
+    filas.push(fila);
+  }
+
+  return filas;
+}
 
 
-    <section class="productos">
+function buscarFilaCabecera(filas){
 
-      <h2>Ejemplo de productos</h2>
+  for(let i=0;i<Math.min(filas.length,80);i++){
 
-      <div class="producto">
+    const texto=normalizar(filas[i].join(" "));
+
+    if(
+      texto.includes("ART") &&
+      (
+        texto.includes("MODELO") ||
+        texto.includes("DESCRIP")
+      )
+    ){
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+
+function obtenerIndice(cabeceras,palabras){
+
+  return cabeceras.findIndex(c =>
+    palabras.some(p => c.includes(p))
+  );
+}
+
+
+function procesarCSV(texto){
+
+  const filas=parseCSV(texto);
+
+  const indiceCabecera=buscarFilaCabecera(filas);
+
+  if(indiceCabecera === -1){
+    throw new Error("No encontramos la fila de títulos de la planilla.");
+  }
+
+  const cabeceras=filas[indiceCabecera].map(normalizar);
+
+  const iArticulo=obtenerIndice(cabeceras,["ART"]);
+  const iComponente=obtenerIndice(cabeceras,["COMPONENTE","CATEGORIA","TIPO"]);
+  const iDescripcion=obtenerIndice(cabeceras,["DESCRIPCION","MODELO","PRODUCTO"]);
+  const iNotas=obtenerIndice(cabeceras,["NOTA","DETALLE","OBSERV"]);
+  const iUSD=obtenerIndice(cabeceras,["USDT","USD"]);
+  const iEfectivo=obtenerIndice(cabeceras,["EFECTIVO"]);
+  const iTransferencia=obtenerIndice(cabeceras,["TRANSFERENCIA"]);
+  const iStock=obtenerIndice(cabeceras,["STOCK"]);
+
+  productos=filas
+    .slice(indiceCabecera+1)
+    .map(fila => ({
+
+      articulo:
+        iArticulo>=0 ? limpiar(fila[iArticulo]) : "",
+
+      componente:
+        iComponente>=0 ? limpiar(fila[iComponente]) : "",
+
+      descripcion:
+        iDescripcion>=0 ? limpiar(fila[iDescripcion]) : "",
+
+      notas:
+        iNotas>=0 ? limpiar(fila[iNotas]) : "",
+
+      usd:
+        iUSD>=0 ? limpiar(fila[iUSD]) : "",
+
+      efectivo:
+        iEfectivo>=0 ? limpiar(fila[iEfectivo]) : "",
+
+      transferencia:
+        iTransferencia>=0 ? limpiar(fila[iTransferencia]) : "",
+
+      stock:
+        iStock>=0 ? limpiar(fila[iStock]) : ""
+
+    }))
+    .filter(p =>
+      p.articulo ||
+      p.descripcion ||
+      p.componente
+    );
+
+  mostrarProductos();
+}
+
+
+function coincideCategoria(producto){
+
+  if(categoriaActual==="TODOS"){
+    return true;
+  }
+
+  const texto=normalizar(
+    producto.componente+" "+producto.descripcion
+  );
+
+  if(categoriaActual==="PANTALLA"){
+    return (
+      texto.includes("PANTALLA") ||
+      texto.includes("MODULO") ||
+      texto.includes("DISPLAY")
+    );
+  }
+
+  if(categoriaActual==="BATERIA"){
+    return texto.includes("BATER");
+  }
+
+  if(categoriaActual==="FLEX"){
+    return texto.includes("FLEX");
+  }
+
+  if(categoriaActual==="CAMARA"){
+    return texto.includes("CAMARA");
+  }
+
+  if(categoriaActual==="AUDIO"){
+    return (
+      texto.includes("AUDIO") ||
+      texto.includes("PARLANTE") ||
+      texto.includes("AURICULAR") ||
+      texto.includes("MICROFONO")
+    );
+  }
+
+  if(categoriaActual==="OTROS"){
+
+    return !(
+      texto.includes("PANTALLA") ||
+      texto.includes("MODULO") ||
+      texto.includes("DISPLAY") ||
+      texto.includes("BATER") ||
+      texto.includes("FLEX") ||
+      texto.includes("CAMARA") ||
+      texto.includes("AUDIO") ||
+      texto.includes("PARLANTE") ||
+      texto.includes("AURICULAR") ||
+      texto.includes("MICROFONO")
+    );
+  }
+
+  return true;
+}
+
+
+function mostrarProductos(){
+
+  const contenedor=document.getElementById("productos");
+  const contador=document.getElementById("contador");
+
+  const busqueda=normalizar(
+    document.getElementById("busqueda").value
+  );
+
+  const filtrados=productos.filter(producto => {
+
+    const texto=normalizar(
+      producto.articulo+" "+
+      producto.componente+" "+
+      producto.descripcion+" "+
+      producto.notas
+    );
+
+    const coincideBusqueda=
+      !busqueda || texto.includes(busqueda);
+
+    return coincideBusqueda && coincideCategoria(producto);
+
+  });
+
+  contador.textContent =
+    filtrados.length+" productos";
+
+  if(!filtrados.length){
+
+    contenedor.innerHTML=
+      '<div class="estado">No encontramos productos con esa búsqueda.</div>';
+
+    return;
+  }
+
+  contenedor.innerHTML=filtrados.map(producto => {
+
+    const estado=normalizar(producto.stock);
+
+    const claseStock=
+      estado.includes("INGRESANDO")
+      ? "stock ingresando"
+      : "stock";
+
+    return `
+      <article class="producto">
 
         <div>
-          <h3>Módulo iPhone 15 Pro X07 120Hz</h3>
+
+          ${
+            producto.articulo
+            ? `<div class="articulo">ART. ${producto.articulo}</div>`
+            : ""
+          }
+
+          <h3>
+            ${producto.descripcion || producto.componente || "Repuesto iPhone"}
+          </h3>
+
           <div class="detalle">
-            Soft OLED · Apto IC · MobileSentrix
+            ${producto.componente || ""}
+            ${
+              producto.notas
+              ? " · "+producto.notas
+              : ""
+            }
           </div>
+
         </div>
 
         <div class="precios">
-          <div class="efectivo">$134.800</div>
-          <div class="transferencia">
-            Transferencia: $148.198 · USDT 85
-          </div>
-          <div class="stock">EN STOCK</div>
+
+          ${
+            producto.efectivo
+            ? `<div class="precio-principal">${producto.efectivo}</div>`
+            : ""
+          }
+
+          ${
+            producto.transferencia
+            ? `<div class="precio-secundario">
+                 Transferencia: ${producto.transferencia}
+               </div>`
+            : ""
+          }
+
+          ${
+            producto.usd
+            ? `<div class="precio-secundario">
+                 USD/USDT: ${producto.usd}
+               </div>`
+            : ""
+          }
+
+          ${
+            producto.stock
+            ? `<div class="${claseStock}">
+                 ${producto.stock}
+               </div>`
+            : ""
+          }
+
         </div>
 
-      </div>
+      </article>
+    `;
+
+  }).join("");
+}
 
 
-      <div class="producto">
+async function cargarProductos(){
 
-        <div>
-          <h3>Batería iPhone 15 Pro AmpSentrix Plus</h3>
-          <div class="detalle">
-            AmpSentrix Plus · Autoprogramable
-          </div>
-        </div>
+  try{
 
-        <div class="precios">
-          <div class="efectivo">$42.800</div>
-          <div class="transferencia">
-            Transferencia: $47.075 · USDT 27
-          </div>
-          <div class="stock">EN STOCK</div>
-        </div>
+    const respuesta=await fetch(
+      CSV_URL+"&t="+Date.now(),
+      {cache:"no-store"}
+    );
 
-      </div>
+    if(!respuesta.ok){
+      throw new Error("Google no respondió correctamente.");
+    }
 
-    </section>
+    const texto=await respuesta.text();
 
-  </main>
+    procesarCSV(texto);
 
-  <footer>
-    <strong>QuickFix</strong><br><br>
-    Repuestos para iPhone · Venta mayorista
-  </footer>
+  }catch(error){
+
+    console.error(error);
+
+    document.getElementById("contador").textContent="";
+
+    document.getElementById("productos").innerHTML=
+      `<div class="estado">
+        No pudimos cargar la lista de precios.<br>
+        Actualizá la página en unos segundos.
+      </div>`;
+  }
+}
+
+
+document
+.getElementById("busqueda")
+.addEventListener("input",mostrarProductos);
+
+
+document
+.querySelectorAll(".categoria")
+.forEach(boton => {
+
+  boton.addEventListener("click",()=>{
+
+    document
+    .querySelectorAll(".categoria")
+    .forEach(b => b.classList.remove("activa"));
+
+    boton.classList.add("activa");
+
+    categoriaActual=boton.dataset.categoria;
+
+    mostrarProductos();
+
+  });
+
+});
+
+
+cargarProductos();
+
+</script>
 
 </body>
 </html>

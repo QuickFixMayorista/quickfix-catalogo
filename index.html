@@ -3,10 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>QuickFix Mayorista | Repuestos para iPhone</title>
 
 <style>
+:root{
+  --violeta:#554aa3;
+  --violeta-oscuro:#302c62;
+  --violeta-suave:#f1efff;
+  --gris:#777982;
+  --gris-claro:#f5f5f7;
+  --borde:#e3e3e8;
+  --texto:#20212a;
+  --verde:#16804a;
+  --verde-fondo:#e8f7ef;
+  --amarillo:#a66b00;
+  --amarillo-fondo:#fff5d9;
+}
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -15,240 +28,500 @@
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#f5f7fb;
-  color:#111827;
+  background:#fff;
+  color:var(--texto);
 }
 
-.aviso{
-  background:#182253;
-  color:white;
-  text-align:center;
-  padding:10px 15px;
-  font-size:14px;
+button,input,select{
+  font:inherit;
 }
+
+/* HEADER */
 
 header{
-  background:white;
-  padding:22px 6%;
-  border-bottom:1px solid #e5e7eb;
+  background:#fff;
+  border-bottom:1px solid var(--borde);
+}
+
+.header-inner{
+  max-width:1450px;
+  margin:auto;
+  min-height:82px;
+  padding:14px 28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
 }
 
 .logo{
-  font-size:38px;
-  font-weight:800;
+  display:flex;
+  flex-direction:column;
+  line-height:.85;
+}
+
+.logo-principal{
+  font-size:34px;
+  font-weight:900;
   font-style:italic;
-  color:#182253;
+  letter-spacing:-2px;
 }
 
-.logo span{
-  color:#a79a94;
-  font-weight:600;
+.logo-quick{
+  color:#858585;
 }
 
-main{
-  max-width:1300px;
-  margin:auto;
-  padding:55px 25px;
+.logo-fix{
+  color:var(--violeta);
 }
 
-.hero{
+.logo small{
+  margin-top:8px;
+  font-size:9px;
+  letter-spacing:5px;
+  color:#999;
+  font-weight:bold;
   text-align:center;
 }
 
+.header-info{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  font-size:13px;
+  color:#555;
+}
+
+.online{
+  color:var(--verde);
+  font-weight:bold;
+}
+
+.punto{
+  display:inline-block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--verde);
+  margin-right:6px;
+}
+
+/* HERO */
+
+.hero{
+  background:#fafafa;
+  border-bottom:1px solid var(--borde);
+}
+
+.hero-inner{
+  max-width:1450px;
+  margin:auto;
+  padding:34px 28px 30px;
+}
+
 .hero h1{
-  color:#182253;
-  font-size:42px;
-  margin-bottom:10px;
+  font-size:30px;
+  color:var(--violeta-oscuro);
+  margin-bottom:7px;
 }
 
 .hero p{
-  color:#6b7280;
-  font-size:17px;
+  color:#707078;
+  font-size:14px;
 }
 
 .buscador{
-  max-width:800px;
-  margin:32px auto 20px;
-  background:white;
-  border-radius:16px;
-  box-shadow:0 8px 30px rgba(0,0,0,.07);
-  padding:8px;
+  margin-top:22px;
+  max-width:900px;
+  position:relative;
 }
 
 .buscador input{
   width:100%;
-  padding:18px;
-  border:0;
-  outline:0;
-  font-size:17px;
-  border-radius:12px;
+  border:1px solid #cfcfd5;
+  border-radius:7px;
+  padding:14px 16px 14px 44px;
+  background:white;
+  outline:none;
+  font-size:14px;
+}
+
+.buscador input:focus{
+  border-color:var(--violeta);
+  box-shadow:0 0 0 3px rgba(85,74,163,.10);
+}
+
+.lupa{
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#777;
+}
+
+/* CATEGORÍAS */
+
+.categorias-wrap{
+  border-bottom:1px solid var(--borde);
+  background:#fff;
 }
 
 .categorias{
-  margin-top:45px;
-}
-
-.categorias h2{
-  color:#182253;
-  margin-bottom:18px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-  gap:13px;
+  max-width:1450px;
+  margin:auto;
+  padding:0 28px;
+  display:flex;
+  gap:4px;
+  overflow-x:auto;
 }
 
 .categoria{
-  background:white;
-  border:1px solid #e5e7eb;
-  border-radius:14px;
-  padding:20px 10px;
-  text-align:center;
+  border:0;
+  background:transparent;
+  color:#555;
+  padding:15px 17px 13px;
   cursor:pointer;
-  transition:.2s;
+  white-space:nowrap;
+  border-bottom:3px solid transparent;
+  font-size:13px;
+  font-weight:600;
 }
 
 .categoria:hover{
-  transform:translateY(-3px);
-  border-color:#182253;
-  box-shadow:0 6px 18px rgba(0,0,0,.07);
+  color:var(--violeta);
 }
 
 .categoria.activa{
-  background:#182253;
-  color:white;
+  color:var(--violeta);
+  border-bottom-color:var(--violeta);
 }
 
-.icono{
-  font-size:26px;
-  margin-bottom:8px;
+/* CUERPO */
+
+.contenido{
+  max-width:1450px;
+  margin:auto;
+  padding:26px 28px 50px;
+  display:grid;
+  grid-template-columns:225px 1fr;
+  gap:28px;
 }
 
-.categoria strong{
+/* FILTROS */
+
+.filtros{
+  font-size:13px;
+}
+
+.filtros h3{
+  font-size:14px;
+  margin-bottom:16px;
+  color:#303038;
+}
+
+.filtro-bloque{
+  border-bottom:1px solid var(--borde);
+  padding-bottom:20px;
+  margin-bottom:20px;
+}
+
+.filtro-bloque label.titulo{
   display:block;
+  font-weight:bold;
+  margin-bottom:10px;
 }
 
-.resultados{
-  margin-top:45px;
+.filtros select{
+  width:100%;
+  padding:10px;
+  border:1px solid #d7d7dc;
+  border-radius:6px;
+  background:white;
+  outline:none;
 }
 
-.cabecera-resultados{
+.stock-opcion{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:9px 0;
+  color:#555;
+}
+
+.stock-opcion input{
+  accent-color:var(--violeta);
+}
+
+.limpiar{
+  width:100%;
+  padding:10px;
+  border:1px solid #d5d5db;
+  border-radius:6px;
+  background:white;
+  cursor:pointer;
+  color:#555;
+}
+
+.limpiar:hover{
+  border-color:var(--violeta);
+  color:var(--violeta);
+}
+
+/* LISTA */
+
+.lista{
+  min-width:0;
+}
+
+.lista-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:15px;
-  margin-bottom:18px;
+  margin-bottom:14px;
 }
 
-.cabecera-resultados h2{
-  color:#182253;
+.lista-top h2{
+  font-size:20px;
+  color:var(--violeta-oscuro);
 }
 
 #contador{
-  color:#6b7280;
-  font-size:14px;
+  color:#777;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.orden{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#777;
+  font-size:12px;
+}
+
+.orden select{
+  padding:8px 30px 8px 10px;
+  border:1px solid #d5d5db;
+  border-radius:6px;
+  background:white;
+}
+
+.aviso{
+  background:#faf9ff;
+  border:1px solid #ded9ff;
+  border-radius:7px;
+  padding:11px 14px;
+  margin-bottom:12px;
+  font-size:12px;
+  color:#565066;
 }
 
 .producto{
-  background:white;
-  border:1px solid #e5e7eb;
-  border-radius:15px;
-  padding:20px;
-  margin-bottom:12px;
   display:grid;
-  grid-template-columns:1fr auto;
+  grid-template-columns:minmax(0,1fr) 190px;
   gap:25px;
-  align-items:center;
+  padding:16px 15px;
+  border-bottom:1px solid var(--borde);
+  background:#fff;
+}
+
+.producto:hover{
+  background:#fafaff;
 }
 
 .articulo{
-  color:#9ca3af;
-  font-size:12px;
+  display:inline-block;
+  font-size:10px;
+  color:#777;
+  background:#f1f1f3;
+  border-radius:4px;
+  padding:3px 6px;
   margin-bottom:6px;
 }
 
 .producto h3{
-  color:#182253;
-  font-size:17px;
-  margin-bottom:7px;
+  font-size:14px;
+  line-height:1.35;
+  color:#292934;
+  margin-bottom:5px;
 }
 
 .detalle{
-  color:#6b7280;
-  font-size:13px;
-  line-height:1.5;
+  color:#777;
+  font-size:11px;
+  line-height:1.45;
 }
 
-.precios{
-  min-width:220px;
+.precio-area{
   text-align:right;
 }
 
-.precio-principal{
+.precio-usd{
+  color:var(--violeta);
   font-size:20px;
+  font-weight:800;
+  line-height:1;
+  margin-bottom:7px;
+}
+
+.precio-usd span{
+  display:block;
+  color:#888;
+  font-size:9px;
   font-weight:700;
+  letter-spacing:.4px;
+  margin-bottom:4px;
 }
 
 .precio-secundario{
-  color:#6b7280;
-  font-size:13px;
-  margin-top:4px;
+  font-size:10px;
+  color:#777;
+  line-height:1.55;
 }
 
 .stock{
   display:inline-block;
-  margin-top:8px;
-  padding:5px 9px;
-  border-radius:20px;
-  background:#dcfce7;
-  color:#166534;
-  font-size:11px;
+  margin-top:7px;
+  padding:4px 7px;
+  border-radius:4px;
+  background:var(--verde-fondo);
+  color:var(--verde);
+  font-size:9px;
   font-weight:bold;
 }
 
 .stock.ingresando{
-  background:#fef3c7;
-  color:#92400e;
+  background:var(--amarillo-fondo);
+  color:var(--amarillo);
 }
 
 .estado{
-  text-align:center;
   padding:45px 20px;
-  color:#6b7280;
+  text-align:center;
+  color:#777;
 }
+
+/* FOOTER */
 
 footer{
-  margin-top:60px;
-  background:#182253;
+  background:#29264f;
   color:white;
-  text-align:center;
-  padding:32px;
+  margin-top:25px;
 }
 
-@media(max-width:650px){
+.footer-inner{
+  max-width:1450px;
+  margin:auto;
+  padding:30px 28px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+}
 
-  main{
-    padding:38px 14px;
+.footer-item{
+  font-size:11px;
+  color:#d8d6e8;
+  line-height:1.5;
+}
+
+.footer-item strong{
+  display:block;
+  color:white;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+  .header-inner{
+    align-items:flex-start;
   }
 
+  .header-info{
+    display:none;
+  }
+
+  .contenido{
+    grid-template-columns:1fr;
+    padding:20px 14px 40px;
+  }
+
+  .filtros{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .filtros h3{
+    grid-column:1/-1;
+  }
+
+  .filtro-bloque{
+    border:0;
+    margin:0;
+    padding:0;
+  }
+
+  .stock-filtro{
+    display:none;
+  }
+
+  .limpiar{
+    height:38px;
+  }
+
+  .hero-inner{
+    padding:25px 14px;
+  }
+
+  .categorias{
+    padding:0 10px;
+  }
+
+  .producto{
+    grid-template-columns:minmax(0,1fr) 130px;
+    padding:14px 5px;
+    gap:10px;
+  }
+
+  .precio-usd{
+    font-size:18px;
+  }
+
+  .footer-inner{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:520px){
+
   .hero h1{
-    font-size:31px;
+    font-size:24px;
+  }
+
+  .lista-top{
+    align-items:flex-start;
+    flex-direction:column;
   }
 
   .producto{
     grid-template-columns:1fr;
-    gap:14px;
   }
 
-  .precios{
+  .precio-area{
     text-align:left;
-    min-width:0;
   }
 
-  .cabecera-resultados{
-    align-items:flex-start;
-    flex-direction:column;
+  .precio-usd span{
+    display:inline;
+    margin-right:5px;
+  }
+
+  .footer-inner{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -256,96 +529,149 @@ footer{
 
 <body>
 
-<div class="aviso">
-  Venta exclusiva para técnicos y comercios especializados
-</div>
-
 <header>
-  <div class="logo"><span>Quick</span>FIX</div>
+  <div class="header-inner">
+
+    <div class="logo">
+      <div class="logo-principal">
+        <span class="logo-quick">Quick</span><span class="logo-fix">FIX</span>
+      </div>
+      <small>MAYORISTA</small>
+    </div>
+
+    <div class="header-info">
+      <div>Catálogo exclusivo para técnicos y comercios</div>
+      <div class="online"><span class="punto"></span>Precios y stock actualizados</div>
+    </div>
+
+  </div>
 </header>
 
-<main>
-
 <section class="hero">
+  <div class="hero-inner">
 
-<h1>Encontrá tu repuesto.</h1>
+    <h1>Catálogo mayorista</h1>
+    <p>Repuestos para iPhone · Encontrá rápidamente el repuesto que necesitás.</p>
 
-<p>Catálogo mayorista de repuestos para iPhone</p>
+    <div class="buscador">
+      <span class="lupa">⌕</span>
+      <input
+        id="busqueda"
+        type="text"
+        placeholder="Buscar por modelo, repuesto, descripción o código..."
+      >
+    </div>
 
-<div class="buscador">
-<input
-  id="busqueda"
-  type="text"
-  placeholder="🔎 Buscá iPhone, repuesto, modelo o código..."
->
-</div>
-
+  </div>
 </section>
 
-<section class="categorias">
+<div class="categorias-wrap">
+  <div class="categorias">
 
-<h2>Categorías</h2>
+    <button class="categoria activa" data-categoria="TODOS">Todos</button>
+    <button class="categoria" data-categoria="PANTALLA">Módulos</button>
+    <button class="categoria" data-categoria="BATERIA">Baterías</button>
+    <button class="categoria" data-categoria="FLEX">Flex</button>
+    <button class="categoria" data-categoria="CAMARA">Cámaras</button>
+    <button class="categoria" data-categoria="AUDIO">Audio</button>
+    <button class="categoria" data-categoria="OTROS">Otros</button>
 
-<div class="grid">
-
-<div class="categoria activa" data-categoria="TODOS">
-<div class="icono">📦</div>
-<strong>Todos</strong>
+  </div>
 </div>
 
-<div class="categoria" data-categoria="PANTALLA">
-<div class="icono">📱</div>
-<strong>Módulos</strong>
-</div>
+<main class="contenido">
 
-<div class="categoria" data-categoria="BATERIA">
-<div class="icono">🔋</div>
-<strong>Baterías</strong>
-</div>
+  <aside class="filtros">
 
-<div class="categoria" data-categoria="FLEX">
-<div class="icono">🔌</div>
-<strong>Flex</strong>
-</div>
+    <h3>Filtrar por</h3>
 
-<div class="categoria" data-categoria="CAMARA">
-<div class="icono">📷</div>
-<strong>Cámaras</strong>
-</div>
+    <div class="filtro-bloque">
+      <label class="titulo" for="filtroModelo">Modelo</label>
+      <select id="filtroModelo">
+        <option value="TODOS">Todos los modelos</option>
+      </select>
+    </div>
 
-<div class="categoria" data-categoria="AUDIO">
-<div class="icono">🔊</div>
-<strong>Audio</strong>
-</div>
+    <div class="filtro-bloque stock-filtro">
+      <label class="titulo">Disponibilidad</label>
 
-<div class="categoria" data-categoria="OTROS">
-<div class="icono">⚙️</div>
-<strong>Otros</strong>
-</div>
+      <label class="stock-opcion">
+        <input type="checkbox" id="soloStock">
+        En stock
+      </label>
 
-</div>
-</section>
+      <label class="stock-opcion">
+        <input type="checkbox" id="soloIngresando">
+        Ingresando
+      </label>
+    </div>
 
-<section class="resultados">
+    <button class="limpiar" id="limpiarFiltros">
+      Limpiar filtros
+    </button>
 
-<div class="cabecera-resultados">
-<h2>Lista de precios</h2>
-<div id="contador">Cargando productos...</div>
-</div>
+  </aside>
 
-<div id="productos">
-<div class="estado">Cargando lista de QuickFix...</div>
-</div>
+  <section class="lista">
 
-</section>
+    <div class="lista-top">
+
+      <div>
+        <h2>Productos</h2>
+        <div id="contador">Cargando productos...</div>
+      </div>
+
+      <div class="orden">
+        Ordenar:
+        <select id="ordenar">
+          <option value="ORIGINAL">Recomendados</option>
+          <option value="AZ">Nombre A-Z</option>
+          <option value="ZA">Nombre Z-A</option>
+          <option value="PRECIO_ASC">USD/USDT menor a mayor</option>
+          <option value="PRECIO_DESC">USD/USDT mayor a menor</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="aviso">
+      Los precios y el stock se actualizan desde nuestra lista de precios.
+      Consultá disponibilidad antes de confirmar tu pedido.
+    </div>
+
+    <div id="productos">
+      <div class="estado">Cargando lista de QuickFix...</div>
+    </div>
+
+  </section>
 
 </main>
 
 <footer>
-<strong>QuickFix Mayorista</strong><br><br>
-Repuestos para iPhone · Venta mayorista
-</footer>
+  <div class="footer-inner">
 
+    <div class="footer-item">
+      <strong>✓ Calidad controlada</strong>
+      Repuestos seleccionados para técnicos y comercios.
+    </div>
+
+    <div class="footer-item">
+      <strong>▣ Catálogo mayorista</strong>
+      Venta exclusiva de repuestos para iPhone.
+    </div>
+
+    <div class="footer-item">
+      <strong>↻ Actualización automática</strong>
+      Precios y stock sincronizados con nuestra lista.
+    </div>
+
+    <div class="footer-item">
+      <strong>QuickFIX Mayorista</strong>
+      Catálogo online para nuestros clientes.
+    </div>
+
+  </div>
+</footer>
 
 <script>
 
@@ -364,6 +690,15 @@ function normalizar(texto){
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g,"")
     .toUpperCase();
+}
+
+function escaparHTML(texto){
+  return String(texto ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
 function parseCSV(texto){
@@ -421,7 +756,6 @@ function parseCSV(texto){
   return filas;
 }
 
-
 function buscarFilaCabecera(filas){
 
   for(let i=0;i<Math.min(filas.length,80);i++){
@@ -442,14 +776,12 @@ function buscarFilaCabecera(filas){
   return -1;
 }
 
-
 function obtenerIndice(cabeceras,palabras){
 
   return cabeceras.findIndex(c =>
     palabras.some(p => c.includes(p))
   );
 }
-
 
 function procesarCSV(texto){
 
@@ -474,7 +806,9 @@ function procesarCSV(texto){
 
   productos=filas
     .slice(indiceCabecera+1)
-    .map(fila => ({
+    .map((fila,index) => ({
+
+      ordenOriginal:index,
 
       articulo:
         iArticulo>=0 ? limpiar(fila[iArticulo]) : "",
@@ -507,9 +841,96 @@ function procesarCSV(texto){
       p.componente
     );
 
+  cargarModelos();
   mostrarProductos();
 }
 
+function obtenerModelo(producto){
+
+  const texto=normalizar(
+    producto.descripcion+" "+producto.notas
+  );
+
+  const patrones=[
+    /IPHONE\s*17\s*PRO\s*MAX/,
+    /IPHONE\s*17\s*PRO/,
+    /IPHONE\s*17\s*PLUS/,
+    /IPHONE\s*17/,
+    /IPHONE\s*16\s*PRO\s*MAX/,
+    /IPHONE\s*16\s*PRO/,
+    /IPHONE\s*16\s*PLUS/,
+    /IPHONE\s*16\s*E/,
+    /IPHONE\s*16/,
+    /IPHONE\s*15\s*PRO\s*MAX/,
+    /IPHONE\s*15\s*PRO/,
+    /IPHONE\s*15\s*PLUS/,
+    /IPHONE\s*15/,
+    /IPHONE\s*14\s*PRO\s*MAX/,
+    /IPHONE\s*14\s*PRO/,
+    /IPHONE\s*14\s*PLUS/,
+    /IPHONE\s*14/,
+    /IPHONE\s*13\s*PRO\s*MAX/,
+    /IPHONE\s*13\s*PRO/,
+    /IPHONE\s*13\s*MINI/,
+    /IPHONE\s*13/,
+    /IPHONE\s*12\s*PRO\s*MAX/,
+    /IPHONE\s*12\s*PRO/,
+    /IPHONE\s*12\s*MINI/,
+    /IPHONE\s*12/,
+    /IPHONE\s*11\s*PRO\s*MAX/,
+    /IPHONE\s*11\s*PRO/,
+    /IPHONE\s*11/,
+    /IPHONE\s*XS\s*MAX/,
+    /IPHONE\s*XS/,
+    /IPHONE\s*XR/,
+    /IPHONE\s*X/,
+    /IPHONE\s*8\s*PLUS/,
+    /IPHONE\s*8/,
+    /IPHONE\s*7\s*PLUS/,
+    /IPHONE\s*7/,
+    /IPHONE\s*SE/
+  ];
+
+  for(const patron of patrones){
+
+    const resultado=texto.match(patron);
+
+    if(resultado){
+      return resultado[0]
+        .replace(/\s+/g," ")
+        .replace("IPHONE","iPhone")
+        .replace("PRO MAX","Pro Max")
+        .replace("PRO","Pro")
+        .replace("PLUS","Plus")
+        .replace("MINI","Mini");
+    }
+  }
+
+  return "";
+}
+
+function cargarModelos(){
+
+  const select=document.getElementById("filtroModelo");
+
+  const modelos=[
+    ...new Set(
+      productos
+        .map(obtenerModelo)
+        .filter(Boolean)
+    )
+  ];
+
+  select.innerHTML=
+    '<option value="TODOS">Todos los modelos</option>'+
+    modelos
+      .map(modelo =>
+        `<option value="${escaparHTML(normalizar(modelo))}">
+          ${escaparHTML(modelo)}
+        </option>`
+      )
+      .join("");
+}
 
 function coincideCategoria(producto){
 
@@ -569,6 +990,23 @@ function coincideCategoria(producto){
   return true;
 }
 
+function numeroPrecio(valor){
+
+  let texto=limpiar(valor)
+    .replace(/[^\d,.-]/g,"");
+
+  if(!texto){
+    return 0;
+  }
+
+  if(texto.includes(",") && texto.includes(".")){
+    texto=texto.replace(/\./g,"").replace(",",".");
+  }else{
+    texto=texto.replace(",",".");
+  }
+
+  return Number(texto) || 0;
+}
 
 function mostrarProductos(){
 
@@ -579,7 +1017,19 @@ function mostrarProductos(){
     document.getElementById("busqueda").value
   );
 
-  const filtrados=productos.filter(producto => {
+  const modeloSeleccionado=
+    document.getElementById("filtroModelo").value;
+
+  const soloStock=
+    document.getElementById("soloStock").checked;
+
+  const soloIngresando=
+    document.getElementById("soloIngresando").checked;
+
+  const orden=
+    document.getElementById("ordenar").value;
+
+  let filtrados=productos.filter(producto => {
 
     const texto=normalizar(
       producto.articulo+" "+
@@ -591,17 +1041,78 @@ function mostrarProductos(){
     const coincideBusqueda=
       !busqueda || texto.includes(busqueda);
 
-    return coincideBusqueda && coincideCategoria(producto);
+    const modeloProducto=
+      normalizar(obtenerModelo(producto));
+
+    const coincideModelo=
+      modeloSeleccionado==="TODOS" ||
+      modeloProducto===modeloSeleccionado;
+
+    const estado=normalizar(producto.stock);
+
+    let coincideStock=true;
+
+    if(soloStock && !soloIngresando){
+      coincideStock=
+        !estado.includes("INGRESANDO") &&
+        !estado.includes("SIN STOCK");
+    }
+
+    if(soloIngresando && !soloStock){
+      coincideStock=estado.includes("INGRESANDO");
+    }
+
+    if(soloStock && soloIngresando){
+      coincideStock=
+        !estado.includes("SIN STOCK");
+    }
+
+    return (
+      coincideBusqueda &&
+      coincideCategoria(producto) &&
+      coincideModelo &&
+      coincideStock
+    );
 
   });
 
-  contador.textContent =
-    filtrados.length+" productos";
+  if(orden==="AZ"){
+    filtrados.sort((a,b) =>
+      a.descripcion.localeCompare(b.descripcion,"es")
+    );
+  }
+
+  if(orden==="ZA"){
+    filtrados.sort((a,b) =>
+      b.descripcion.localeCompare(a.descripcion,"es")
+    );
+  }
+
+  if(orden==="PRECIO_ASC"){
+    filtrados.sort((a,b) =>
+      numeroPrecio(a.usd)-numeroPrecio(b.usd)
+    );
+  }
+
+  if(orden==="PRECIO_DESC"){
+    filtrados.sort((a,b) =>
+      numeroPrecio(b.usd)-numeroPrecio(a.usd)
+    );
+  }
+
+  if(orden==="ORIGINAL"){
+    filtrados.sort((a,b) =>
+      a.ordenOriginal-b.ordenOriginal
+    );
+  }
+
+  contador.textContent=
+    filtrados.length+" productos encontrados";
 
   if(!filtrados.length){
 
     contenedor.innerHTML=
-      '<div class="estado">No encontramos productos con esa búsqueda.</div>';
+      '<div class="estado">No encontramos productos con esos filtros.</div>';
 
     return;
   }
@@ -622,54 +1133,70 @@ function mostrarProductos(){
 
           ${
             producto.articulo
-            ? `<div class="articulo">ART. ${producto.articulo}</div>`
+            ? `<div class="articulo">ART. ${escaparHTML(producto.articulo)}</div>`
             : ""
           }
 
           <h3>
-            ${producto.descripcion || producto.componente || "Repuesto iPhone"}
+            ${escaparHTML(
+              producto.descripcion ||
+              producto.componente ||
+              "Repuesto iPhone"
+            )}
           </h3>
 
           <div class="detalle">
-            ${producto.componente || ""}
+            ${escaparHTML(producto.componente || "")}
+
             ${
               producto.notas
-              ? " · "+producto.notas
+              ? " · "+escaparHTML(producto.notas)
               : ""
             }
           </div>
 
         </div>
 
-        <div class="precios">
+        <div class="precio-area">
+
+          ${
+            producto.usd
+            ? `
+              <div class="precio-usd">
+                <span>USD / USDT</span>
+                ${escaparHTML(producto.usd)}
+              </div>
+            `
+            : ""
+          }
 
           ${
             producto.efectivo
-            ? `<div class="precio-principal">${producto.efectivo}</div>`
+            ? `
+              <div class="precio-secundario">
+                Efectivo: ${escaparHTML(producto.efectivo)}
+              </div>
+            `
             : ""
           }
 
           ${
             producto.transferencia
-            ? `<div class="precio-secundario">
-                 Transferencia: ${producto.transferencia}
-               </div>`
-            : ""
-          }
-
-          ${
-            producto.usd
-            ? `<div class="precio-secundario">
-                 USD/USDT: ${producto.usd}
-               </div>`
+            ? `
+              <div class="precio-secundario">
+                Transferencia: ${escaparHTML(producto.transferencia)}
+              </div>
+            `
             : ""
           }
 
           ${
             producto.stock
-            ? `<div class="${claseStock}">
-                 ${producto.stock}
-               </div>`
+            ? `
+              <div class="${claseStock}">
+                ${escaparHTML(producto.stock)}
+              </div>
+            `
             : ""
           }
 
@@ -680,7 +1207,6 @@ function mostrarProductos(){
 
   }).join("");
 }
-
 
 async function cargarProductos(){
 
@@ -713,11 +1239,49 @@ async function cargarProductos(){
   }
 }
 
-
 document
 .getElementById("busqueda")
 .addEventListener("input",mostrarProductos);
 
+document
+.getElementById("filtroModelo")
+.addEventListener("change",mostrarProductos);
+
+document
+.getElementById("soloStock")
+.addEventListener("change",mostrarProductos);
+
+document
+.getElementById("soloIngresando")
+.addEventListener("change",mostrarProductos);
+
+document
+.getElementById("ordenar")
+.addEventListener("change",mostrarProductos);
+
+document
+.getElementById("limpiarFiltros")
+.addEventListener("click",()=>{
+
+  document.getElementById("busqueda").value="";
+  document.getElementById("filtroModelo").value="TODOS";
+  document.getElementById("soloStock").checked=false;
+  document.getElementById("soloIngresando").checked=false;
+  document.getElementById("ordenar").value="ORIGINAL";
+
+  categoriaActual="TODOS";
+
+  document
+  .querySelectorAll(".categoria")
+  .forEach(boton =>
+    boton.classList.toggle(
+      "activa",
+      boton.dataset.categoria==="TODOS"
+    )
+  );
+
+  mostrarProductos();
+});
 
 document
 .querySelectorAll(".categoria")
@@ -727,11 +1291,14 @@ document
 
     document
     .querySelectorAll(".categoria")
-    .forEach(b => b.classList.remove("activa"));
+    .forEach(b =>
+      b.classList.remove("activa")
+    );
 
     boton.classList.add("activa");
 
-    categoriaActual=boton.dataset.categoria;
+    categoriaActual=
+      boton.dataset.categoria;
 
     mostrarProductos();
 
@@ -739,10 +1306,8 @@ document
 
 });
 
-
 cargarProductos();
 
 </script>
-
 </body>
 </html>

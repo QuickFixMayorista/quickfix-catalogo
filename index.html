@@ -839,35 +839,6 @@ function obtenerFamiliaCategoria(categoria){
 
 function categoriasDisponibles(){
 
-  const categoriasPermitidas=[
-    "MODULOS",
-    "BATERIAS",
-    "TAG-ON",
-    "FLEX DE CARGA",
-    "FLEX NFC",
-    "MAGNETICO MAGSAFE",
-    "CAMARA PRINCIPAL",
-    "BOTON LATERAL CONTROL CAMARA",
-    "VIDRIO CAMARA PRINCIPAL",
-    "FLEX FLASH",
-    "CAMARA FRONTAL",
-    "SENSOR DE PROXIMIDAD",
-    "FLEX DE VOLUMEN",
-    "FLEX DE POWER",
-    "ALTAVOZ",
-    "AURICULAR",
-    "FLEX BLUETOOTH",
-    "FLEX WIFI",
-    "FLEX GPS",
-    "TAPAS TRASERAS",
-    "TORNILLOS",
-    "GOMITAS CAMARA TRASERA",
-    "BOTON HOME",
-    "HERRAMIENTRAS - INSUMOS",
-    "HERRAMIENTAS - INSUMOS",
-    "ACCESORIOS"
-  ];
-
   const mapa=new Map();
 
   productos.forEach(producto=>{
@@ -875,11 +846,26 @@ function categoriasDisponibles(){
     const nombre=limpiar(producto.componente);
     const clave=normalizar(nombre);
 
+    if(!nombre) return;
+
+    // No dejamos que los modelos de iPhone se conviertan en subcategorías
+    if(clave.startsWith("IPHONE")) return;
+
+    // Tampoco encabezados o textos internos del Sheet
     if(
-      nombre &&
-      categoriasPermitidas.includes(clave) &&
-      !mapa.has(clave)
+      clave==="COMPONENTE" ||
+      clave==="CATEGORIA" ||
+      clave==="MODELO" ||
+      clave==="PRODUCTO" ||
+      clave==="DESCRIPCION" ||
+      clave==="ARTICULO" ||
+      clave==="ART"
     ){
+      return;
+    }
+
+    // Guardamos cada subcategoría real una sola vez
+    if(!mapa.has(clave)){
       mapa.set(clave,nombre);
     }
 

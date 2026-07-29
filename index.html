@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>QuickFix | Repuestos para iPhone</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f8fb;
+      color: #111827;
+    }
+
+    .aviso {
+      background: #182253;
+      color: white;
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+
+    header {
+      background: white;
+      padding: 25px 7%;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo {
+      font-size: 38px;
+      font-weight: 800;
+      font-style: italic;
+      color: #182253;
+    }
+
+    .logo span {
+      color: #a79a94;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 25px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .hero h1 {
+      color: #182253;
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #6b7280;
+      font-size: 18px;
+    }
+
+    .buscador {
+      max-width: 800px;
+      margin: 35px auto;
+      background: white;
+      padding: 12px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    }
+
+    .buscador input {
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 18px;
+      font-size: 17px;
+      border-radius: 12px;
+    }
+
+    .categorias {
+      margin-top: 55px;
+    }
+
+    .categorias h2 {
+      margin-bottom: 20px;
+      color: #182253;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .categoria {
+      background: white;
+      padding: 25px 15px;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .categoria:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+      border-color: #182253;
+    }
+
+    .icono {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .categoria strong {
+      color: #182253;
+    }
+
+    .productos {
+      margin-top: 55px;
+    }
+
+    .productos h2 {
+      color: #182253;
+      margin-bottom: 20px;
+    }
+
+    .producto {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 15px;
+      border: 1px solid #e5e7eb;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .producto h3 {
+      color: #182253;
+      margin-bottom: 8px;
+    }
+
+    .detalle {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .precios {
+      text-align: right;
+    }
+
+    .efectivo {
+      font-size: 21px;
+      font-weight: bold;
+      color: #111827;
+    }
+
+    .transferencia {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .stock {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    footer {
+      margin-top: 70px;
+      background: #182253;
+      color: white;
+      padding: 35px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 31px;
+      }
+
+      main {
+        padding: 40px 15px;
+      }
+
+      .producto {
+        grid-template-columns: 1fr;
+      }
+
+      .precios {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="aviso">
+    Venta exclusiva para técnicos y comercios especializados
+  </div>
+
+  <header>
+    <div class="logo"><span>Quick</span>FIX</div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <h1>Encontrá tu repuesto.</h1>
+
+      <p>
+        Catálogo mayorista de repuestos para iPhone
+      </p>
+
+      <div class="buscador">
+        <input
+          type="text"
+          placeholder="🔎 Buscá por modelo, repuesto o código..."
+        >
+      </div>
+
+    </section>
+
+
+    <section class="categorias">
+
+      <h2>Categorías</h2>
+
+      <div class="grid">
+
+        <div class="categoria">
+          <div class="icono">📱</div>
+          <strong>Módulos</strong>
+        </div>
+
+        <div class="categoria">
+          <div class="icono">🔋</div>
+          <strong>Baterías</strong>
+        </div>
+
+        <div class="categoria">
+          <div class="icono">🔌</div>
+          <strong>Flex</strong>
+        </div>
+
+        <div class="categoria">
+          <div class="icono">📷</div>
+          <strong>Cámaras</strong>
+        </div>
+
+        <div class="categoria">
+          <div class="icono">🔊</div>
+          <strong>Audio</strong>
+        </div>
+
+        <div class="categoria">
+          <div class="icono">⚙️</div>
+          <strong>Otros</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="productos">
+
+      <h2>Ejemplo de productos</h2>
+
+      <div class="producto">
+
+        <div>
+          <h3>Módulo iPhone 15 Pro X07 120Hz</h3>
+          <div class="detalle">
+            Soft OLED · Apto IC · MobileSentrix
+          </div>
+        </div>
+
+        <div class="precios">
+          <div class="efectivo">$134.800</div>
+          <div class="transferencia">
+            Transferencia: $148.198 · USDT 85
+          </div>
+          <div class="stock">EN STOCK</div>
+        </div>
+
+      </div>
+
+
+      <div class="producto">
+
+        <div>
+          <h3>Batería iPhone 15 Pro AmpSentrix Plus</h3>
+          <div class="detalle">
+            AmpSentrix Plus · Autoprogramable
+          </div>
+        </div>
+
+        <div class="precios">
+          <div class="efectivo">$42.800</div>
+          <div class="transferencia">
+            Transferencia: $47.075 · USDT 27
+          </div>
+          <div class="stock">EN STOCK</div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <strong>QuickFix</strong><br><br>
+    Repuestos para iPhone · Venta mayorista
+  </footer>
+
+</body>
+</html>
